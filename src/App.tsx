@@ -28,8 +28,8 @@ function App() {
 
   return (
     <div className={cn('bg-cover bg-center h-screen', { 
-      'bg-black' : isOpen,
-      'bg-image': !isOpen,
+      'bg-black bg-image' : isOpen,
+      'bg-cocktail' : !isOpen,
     })}>
       <BackToTop />
       <nav>

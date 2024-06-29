@@ -13,7 +13,7 @@ export default {
         '-translate-y-1.5': 'translateY(-0.375rem)', // Tailwind's spacing scale for -1.5
       },
       backgroundImage: {
-        'image': "url('background.jpg')",
+        'cocktail': "url('/background.jpg')",
       },
       fontFamily: {
         helvetica: ['Helvetica Neue', 'sans-serif'],
