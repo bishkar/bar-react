@@ -1,26 +1,17 @@
+
 import './Navbar.css';
+import cn from 'classnames';
 import { NavbarProps } from './Navbar.props';
 
-import cn from 'classnames';
-
-function Navbar({children, isOpen}: NavbarProps) {
+function Navbar({ children }: NavbarProps) {
   return (
-    <div className={cn(
-      'w-full md:block md:w-auto',
-      { 'hidden': !isOpen }
-
-    )} id="navbar-default">
-      <ul className={cn(
-        'font-medium flex flex-col p-4 items-center justify-center',
-        'md:p-0 mt-4',
-        'md:flex-row md:space-x-8 rtl:space-x-reverse',
-        'md:mt-0 md:border-0 md:bg-white dark:bg-transparent',
-        'md:dark:bg-transparent dark:border-orange-100',
-        { 'pt-10' : isOpen}
+    <nav>
+      <div className={cn(
+        'max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-6 sm:px-0 px-4 sm:mb-0 mb-36',
       )}>
         {children}
-      </ul>
-    </div>
+      </div>
+    </nav>
   );
 }
 

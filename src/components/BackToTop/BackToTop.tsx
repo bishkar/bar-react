@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
+import { BackToTopProps } from './BackToTopProps';
 
-function BackToTop() {
+function BackToTop({ onClick }: BackToTopProps){
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -10,12 +11,6 @@ function BackToTop() {
     } else {
       setVisible(false);
     }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-    });
   };
 
   useEffect(() => {
@@ -28,7 +23,7 @@ function BackToTop() {
   return (
     <button
       type='button'
-      onClick={scrollToTop}
+      onClick={onClick}
       className={cn(
         '!fixed bottom-5 right-5 rounded-full bg-red-600 p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-red-700 focus:bg-red-700 focus:outline-none active:bg-red-800',
         { hidden: !visible }

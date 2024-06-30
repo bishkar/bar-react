@@ -1,13 +1,12 @@
 import './App.css';
 
 import cn from 'classnames';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 
 import Logo from './components/Navbar/Logo/Logo';
 import ApadtiveMenu from './components/Navbar/ApadtiveMenu/ApadtiveMenu';
 import NavItem from './components/Navbar/NavItem/NavItem';
-import Navbar from './components/Navbar/Navbar/Navbar';
 
 import Banner from './components/Banner/Banner';
 import Button from './components/Buttons/Button/Button';
@@ -19,22 +18,24 @@ import Advertisment from './components/Info/Advertisment/Advertisment';
 import BackToTop from './components/BackToTop/BackToTop';
 import Galery from './components/Info/Galery/Galery';
 import Reservation from './components/Info/Reservation/Reservation/Reservation';
-import { createBrowserRouter } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar/Navbar';
+import NavbarContainer from './components/Navbar/NavbarContainer/NavbarContainer';
 
-
-
-const router = createBrowserRouter([
-  {
-    'path': '/',
-    'element': <App />,
-  }
-]);
+const loadImages = () => {
+  return [
+    { 'src': 'photoes/1.jpg', 'alt': '1' }, { 'src': 'photoes/2.jpg', 'alt': '2' }, { 'src': 'photoes/3.jpg', 'alt': '3' }, { 'src': 'photoes/4.jpg', 'alt': '4' }, { 'src': 'photoes/5.jpg', 'alt': '5' }
+  ];
+};
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
   const regRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -53,27 +54,19 @@ function App() {
       'bg-black bg-image' : isOpen,
       'bg-cocktail' : !isOpen,
     })}>
-      <BackToTop />
-      <nav>
-        <div className={cn(
-          'max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-6 sm:px-0 px-4 sm:mb-0 mb-36',
-        )}>
-          <Logo isOpen={isOpen}/>
-          <ApadtiveMenu toggleMenu={toggleMenu} isOpen={isOpen} />
+      <BackToTop onClick={scrollToTop}/>
 
-          <Navbar isOpen={isOpen}>
-            <NavItem text="What's On" isOpen={isOpen} onClick={scrollToAbout}/>
-            <NavItem text="Menu" isOpen={isOpen}/>
-            <NavItem text="Book a Table" isOpen={isOpen} onClick={scrollToReg}/>
-            <NavItem text="Contact" isOpen={isOpen}/>
-          </Navbar>
-        </div>
-      </nav>
-
-      {!isOpen && 
-      <div className={cn(
-        { 'opacity-0': isOpen}
-      )}>
+      <Navbar>
+        <Logo isOpen={isOpen} onClick={scrollToTop}/>
+        <ApadtiveMenu toggleMenu={toggleMenu} isOpen={isOpen} />
+        <NavbarContainer isOpen={isOpen}>
+          <NavItem text="What's On" isOpen={isOpen} onClick={scrollToAbout}/>
+          <NavItem text="Menu" isOpen={isOpen}/>
+          <NavItem text="Book a Table" isOpen={isOpen} onClick={scrollToReg}/>
+          <NavItem text="Contact" isOpen={isOpen}/>
+        </NavbarContainer>
+      </Navbar>
+      <>
         <Banner>
           <Button text="Book a Table" onClick={scrollToReg}/>
         </Banner>
@@ -108,9 +101,7 @@ function App() {
           </Advertisment>
 
           <Galery
-            images={[
-              { 'src': 'photoes/1.jpg', 'alt': '1' }, { 'src': 'photoes/2.jpg', 'alt': '2' }, { 'src': 'photoes/3.jpg', 'alt': '3' }, { 'src': 'photoes/4.jpg', 'alt': '4' }, { 'src': 'photoes/5.jpg', 'alt': '5' }
-            ]}
+            images={loadImages()}
           >
             <Header text="Come Down & Grab a Pint"/>
           </Galery>
@@ -119,9 +110,7 @@ function App() {
             <Header text="Reserve a Table"/>
           </Reservation>
         </InfoContainer>
-      </div>
-      
-      }
+      </>
     </div>
   );
 }
