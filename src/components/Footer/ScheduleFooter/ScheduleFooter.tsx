@@ -6,9 +6,9 @@ function ScheduleFooter() {
     <div className="grid grid-rows-3 gap-5 sm:ml-auto">
       <div className="text-lg">Opening Hours</div>
       <div className="grid grid-rows-3 text-xs">
-        <div>Mon - Fri: 8am - 8pm</div>
-        <div>Saturday: 9am - 10pm</div>
-        <div>Sunday: 9am - 8pm</div>
+        <div>Mon - Fri: 8pm - 4am</div>
+        <div>Saturday: 6pm - 4am</div>
+        <div>Sunday: 6pm - 4pm</div>
       </div>
       <div className="grid grid-rows-2">
         <div>{apiStreet}</div>
