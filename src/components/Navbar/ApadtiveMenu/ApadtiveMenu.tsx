@@ -8,7 +8,7 @@ function AdaptiveMenu({ toggleMenu, isOpen }: AdaptiveMenuProps) {
       onClick={toggleMenu}
       type="button"
       className={cn(
-        'ml-auto inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-orange-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-orange-200 dark:text-orange-400 dark:focus:ring-white transition-colors duration-300 ease-in-out',
+        'fixed top-10 right-10 ml-auto inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-orange-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-orange-200 dark:text-orange-400 dark:focus:ring-white transition-colors duration-300 ease-in-out',
       )}
       aria-controls="navbar-default"
       aria-expanded={isOpen}

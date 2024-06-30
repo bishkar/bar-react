@@ -2,11 +2,10 @@ import './NavItem.css';
 import { NavItemProps } from './NavItem.props';
 import cn from 'classnames';
 
-function NavItem({ text, isOpen, onClick, href }: NavItemProps) {
+function NavItem({ text, isOpen, onClick }: NavItemProps) {
   return (
     <li className='block py-2 mx-7 cursor-pointer'>
       <a
-        href={href}
         onClick={onClick}
         className={cn(
           'block py-2 mx-7 transition duration-300 ease-in-out',

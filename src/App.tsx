@@ -21,6 +21,14 @@ import Reservation from './components/Info/Reservation/Reservation/Reservation';
 import Navbar from './components/Navbar/Navbar/Navbar';
 import NavbarContainer from './components/Navbar/NavbarContainer/NavbarContainer';
 
+import FooterContainer from './components/Footer/FooterContainer/FooterContainer';
+import InfoFooter from './components/Footer/InfoFooter/InfoFooter';
+import InfoFooterContainer from './components/Footer/InfoFooter/InfoFooterContainer/InfoFooterContainer';
+import InfoFooterItem from './components/Footer/InfoFooter/InfoFooterItem/InfoFooterItem';
+import ContactFooter from './components/Footer/ContactFooter/ContactFooter';
+import ScheduleFooter from './components/Footer/ScheduleFooter/ScheduleFooter';
+import FormFooter from './components/Footer/FormFooter/FormFooter';
+
 const loadImages = () => {
   return [
     { 'src': 'photoes/1.jpg', 'alt': '1' }, { 'src': 'photoes/2.jpg', 'alt': '2' }, { 'src': 'photoes/3.jpg', 'alt': '3' }, { 'src': 'photoes/4.jpg', 'alt': '4' }, { 'src': 'photoes/5.jpg', 'alt': '5' }
@@ -32,12 +40,16 @@ function App() {
 
   const regRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const toggleMenu = () => {
+    if (!isOpen) {
+      scrollToTop();
+    }
     setIsOpen(!isOpen);
   };
 
@@ -49,6 +61,10 @@ function App() {
     aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToFooter = () => {
+    footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className={cn('bg-cover bg-center h-screen', { 
       'bg-black bg-image' : isOpen,
@@ -57,13 +73,13 @@ function App() {
       <BackToTop onClick={scrollToTop}/>
 
       <Navbar>
-        <Logo isOpen={isOpen} onClick={scrollToTop}/>
+        <Logo isOpen={isOpen} onClick={scrollToTop} fixed/>
         <ApadtiveMenu toggleMenu={toggleMenu} isOpen={isOpen} />
         <NavbarContainer isOpen={isOpen}>
           <NavItem text="What's On" isOpen={isOpen} onClick={scrollToAbout}/>
           <NavItem text="Menu" isOpen={isOpen}/>
           <NavItem text="Book a Table" isOpen={isOpen} onClick={scrollToReg}/>
-          <NavItem text="Contact" isOpen={isOpen}/>
+          <NavItem text="Contact" isOpen={isOpen} onClick={scrollToFooter}/>
         </NavbarContainer>
       </Navbar>
       <>
@@ -109,6 +125,21 @@ function App() {
           <Reservation ref={regRef}>
             <Header text="Reserve a Table"/>
           </Reservation>
+
+          <FooterContainer ref={footerRef}>
+            <InfoFooter>
+              <Logo isOpen={false} onClick={scrollToTop}/>
+              <InfoFooterContainer>
+                <InfoFooterItem text="What's On" onClick={scrollToAbout}/>
+                <InfoFooterItem text="Menu" />
+                <InfoFooterItem text="Reserve a Table" onClick={scrollToReg}/>
+                <InfoFooterItem text="Contact" />
+              </InfoFooterContainer>
+            </InfoFooter>
+            <ContactFooter />
+            <FormFooter />
+            <ScheduleFooter />
+          </FooterContainer>
         </InfoContainer>
       </>
     </div>
