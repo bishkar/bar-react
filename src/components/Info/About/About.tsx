@@ -1,10 +1,12 @@
 import './About.css';
 
+import { forwardRef } from 'react';
+
 import { AboutProps } from './About.props';
 
-function About({ children }: AboutProps) {
+const About = forwardRef<HTMLDivElement, AboutProps>(({ children }, ref) =>{
   return (
-    <div className='grid sm:grid-cols-3 grid-cols-1 mb-16'>
+    <div className='grid sm:grid-cols-3 grid-cols-1 mb-16' ref={ref}>
       <div className='grid grid-rows-2 gap-3'>
         {children}
         <div className='text-lg font-helvetica'>Your Neighbourhood Institution</div>
@@ -15,6 +17,6 @@ function About({ children }: AboutProps) {
       </div>
     </div>
   );
-}
+});
 
 export default About;
